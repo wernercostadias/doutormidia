@@ -477,6 +477,28 @@
       line-height: 1.5;
     }
 
+    .regra-chave.alerta {
+      align-items: center;
+      margin: 10px 22px 18px;
+      padding: 4px 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .regra-chave.alerta > span {
+      width: 30px;
+      height: 30px;
+      color: #ff5148;
+      background: transparent;
+    }
+
+    .regra-chave.alerta svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .regra-chave.alerta strong { color: var(--texto); }
+
     .video-pendente {
       display: flex;
       align-items: center;
@@ -619,6 +641,7 @@
       .atalhos { grid-template-columns: 1fr; }
       .painel-titulo { padding-inline: 14px; }
       .regra-chave { margin-inline: 9px; }
+      .regra-chave.alerta { margin-inline: 14px; }
       .video-pendente { margin-inline: 9px; }
       .aviso { align-items: start; padding: 17px; }
       .dados { grid-template-columns: 1fr; }
@@ -662,7 +685,7 @@
 
     <section class="conteudo" id="regras">
       <div class="cabecalho-secao">
-        <span class="eyebrow">Participação rápida</span>
+        <span class="eyebrow">Veja as regras</span>
         <h2>Escolha o <span>prêmio</span></h2>
       </div>
 
@@ -704,15 +727,19 @@
             </div>
           </article>
 
-          <div class="regra-chave">
-            <span>!</span>
+          <div class="regra-chave alerta">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.3 3.7 2.4 17.3A2 2 0 0 0 4.1 20h15.8a2 2 0 0 0 1.7-2.7L13.7 3.7a2 2 0 0 0-3.4 0Z"/>
+                <path d="M12 9v4"/>
+                <path d="M12 17h.01"/>
+              </svg>
+            </span>
             <div>
               <strong>Atenção à regra principal</strong>
               <p>Os compartilhamentos e as marcações serão conferidos. Se alguma regra não tiver sido cumprida, outra pessoa será selecionada.</p>
             </div>
           </div>
-
-          <div class="video-pendente">🎬 Link do vídeo oficial em breve</div>
         </div>
       </div>
 
@@ -750,15 +777,12 @@
               <p>Você pode fazer mais comentários marcando amigos. Quanto mais amigos você marcar, mais chances terá de ganhar.</p>
             </div>
           </div>
-
-          <div class="video-pendente">🎬 Link do vídeo oficial em breve</div>
         </div>
       </div>
 
       <div class="aviso">
         <span class="aviso-icone">!</span>
         <div>
-          <strong>O link do vídeo ainda será adicionado.</strong>
           <p>Assim que a publicação oficial estiver disponível, o botão para participar aparecerá nesta página.</p>
         </div>
       </div>
