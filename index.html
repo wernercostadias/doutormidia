@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3a1405">
+  <meta name="description" content="Links oficiais do Doutor Mídia">
+  <title>Doutor Mídia</title>
+  <link rel="icon" href="foto.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    html {
+      background: #240b03;
+    }
+
+    body {
+      min-height: 100dvh;
+      color: #f2fff8;
+      background:
+        radial-gradient(120% 60% at 50% -5%, #c54b0a 0%, transparent 55%),
+        radial-gradient(80% 50% at 100% 70%, #923008 0%, transparent 60%),
+        radial-gradient(70% 45% at 0% 95%, #ad3b08 0%, transparent 55%),
+        linear-gradient(170deg, #7a2608 0%, #3a1405 55%, #240b03 100%);
+      background-attachment: fixed;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .marca {
+      position: fixed;
+      z-index: 0;
+      top: 50%;
+      left: 50%;
+      color: transparent;
+      font-family: "Unbounded", "Arial Black", Impact, sans-serif;
+      font-size: 22vh;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      pointer-events: none;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.075);
+    }
+
+    #fx {
+      position: fixed;
+      z-index: 1;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pagina {
+      position: relative;
+      z-index: 2;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 54px 20px 60px;
+    }
+
+    .avatar {
+      width: 148px;
+      height: 148px;
+      margin: 0 auto;
+      padding: 5px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #ffc83d, #ff7a1a, #ffd75e, #ffc83d);
+      box-shadow: 0 0 50px rgba(255, 122, 26, 0.45), 0 0 110px rgba(255, 200, 61, 0.25);
+      animation: respirar 3.4s ease-in-out infinite;
+    }
+
+    .avatar img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 4px solid #3a1405;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nome {
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    .nome h1 {
+      font-family: "Unbounded", "Arial Black", Impact, sans-serif;
+      font-size: clamp(1.85rem, 9vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nome h1 .ouro {
+      color: #ffc83d;
+      background: linear-gradient(92deg, #ffe28a, #ffc83d 45%, #ff9d2e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-height: 64px;
+      padding: 14px 20px;
+      overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      color: #f2fff8;
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035) 60%);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-decoration: none;
+      opacity: 0;
+      backdrop-filter: blur(10px);
+      transform: translateY(24px);
+      transition: transform 0.16s ease, border-color 0.16s, box-shadow 0.16s;
+      animation: entrar 0.6s cubic-bezier(0.2, 0.8, 0.3, 1.25) forwards;
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .btn:nth-of-type(1) { animation-delay: 0.1s; }
+    .btn:nth-of-type(2) { animation-delay: 0.22s; }
+    .btn:nth-of-type(3) { animation-delay: 0.34s; }
+    .btn:nth-of-type(4) { animation-delay: 0.46s; }
+    .btn:nth-of-type(5) { animation-delay: 0.58s; }
+    .btn:nth-of-type(6) { animation-delay: 0.7s; }
+
+    .btn:active {
+      transform: scale(0.965) !important;
+    }
+
+    .btn::after {
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+      content: "";
+      transform: skewX(-22deg);
+      animation: varrer 5.5s ease-in-out infinite;
+    }
+
+    .btn:nth-of-type(even)::after {
+      animation-delay: 2.2s;
+    }
+
+    .ic {
+      display: flex;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 200, 61, 0.3);
+      border-radius: 12px;
+      background: rgba(255, 200, 61, 0.13);
+      font-size: 1.2rem;
+    }
+
+    .ic svg {
+      width: 20px;
+      height: 20px;
+      color: #ffc83d;
+    }
+
+    .txt {
+      flex: 1;
+      text-align: left;
+    }
+
+    .seta {
+      color: #ffc83d;
+      font-weight: 800;
+      transition: transform 0.16s ease;
+    }
+
+    .btn.ouro {
+      border: 0;
+      color: #241500;
+      background: linear-gradient(120deg, #fff08a, #ffd84d 55%, #ffc42e);
+      box-shadow: 0 10px 34px rgba(255, 216, 77, 0.52), inset 0 1.5px 0 rgba(255, 255, 255, 0.72);
+      animation: entrar 0.6s cubic-bezier(0.2, 0.8, 0.3, 1.25) forwards, pulsar 2.8s ease-in-out 1.2s infinite;
+    }
+
+    .btn.ouro .ic {
+      border-color: rgba(0, 0, 0, 0.15);
+      background: rgba(0, 0, 0, 0.14);
+    }
+
+    .btn.ouro .ic.produto {
+      width: 66px;
+      height: 54px;
+      margin: -5px 0 -5px -8px;
+      border: 0;
+      background: transparent;
+    }
+
+    .btn.ouro .ic.produto img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 5px 5px rgba(36, 21, 0, 0.48))
+        drop-shadow(0 0 7px rgba(255, 239, 174, 0.42));
+    }
+
+    .btn.ouro .txt {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .btn.ouro .seta {
+      color: #241500;
+    }
+
+    @keyframes respirar {
+      0%, 100% { box-shadow: 0 0 40px rgba(255, 122, 26, 0.4), 0 0 100px rgba(255, 200, 61, 0.2); }
+      50% { box-shadow: 0 0 64px rgba(255, 122, 26, 0.6), 0 0 140px rgba(255, 200, 61, 0.4); }
+    }
+
+    @keyframes entrar {
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes varrer {
+      0%, 58% { left: -80%; }
+      100% { left: 150%; }
+    }
+
+    @keyframes pulsar {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 216, 77, 0.58), 0 10px 34px rgba(255, 216, 77, 0.52), inset 0 1.5px 0 rgba(255, 255, 255, 0.72);
+      }
+      50% {
+        box-shadow: 0 0 0 13px rgba(255, 216, 77, 0), 0 12px 44px rgba(255, 216, 77, 0.66), inset 0 1.5px 0 rgba(255, 255, 255, 0.72);
+      }
+    }
+
+    @media (min-width: 700px) {
+      .marca { font-size: 30vh; }
+    }
+
+    @media (hover: hover) {
+      .btn:hover {
+        border-color: rgba(255, 200, 61, 0.6);
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 200, 61, 0.12);
+        transform: translateY(-3px);
+      }
+
+      .btn:hover .seta { transform: translateX(5px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .btn {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="marca" aria-hidden="true">Doutor Mídia</div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <main class="pagina">
+    <div class="avatar">
+      <img src="foto.jpg" alt="Doutor Mídia" width="150" height="150">
+    </div>
+
+    <header class="nome">
+      <h1>Doutor <span class="ouro">Mídia</span></h1>
+    </header>
+
+    <nav class="links" aria-label="Links do Doutor Mídia">
+      <a class="btn ouro" href="regras.html">
+        <span class="ic produto" aria-hidden="true">
+          <img src="jbl.webp" alt="" width="535" height="535">
+        </span>
+        <span class="txt">Ganhe uma JBL Boombox!</span>
+        <span class="seta" aria-hidden="true">→</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/doutormidiaa" target="_blank" rel="noopener noreferrer">
+        <span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.6" cy="6.4" r="1.3" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="txt">Instagram</span>
+        <span class="seta" aria-hidden="true">→</span>
+      </a>
+
+      <a class="btn" href="https://www.instagram.com/panelada.clandestina" target="_blank" rel="noopener noreferrer">
+        <span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.6" cy="6.4" r="1.3" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <span class="txt">Panelada Clandestina</span>
+        <span class="seta" aria-hidden="true">→</span>
+      </a>
+
+      <a class="btn" href="https://www.tiktok.com/@doutormidia" target="_blank" rel="noopener noreferrer">
+        <span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16.6 3c.4 2.1 1.8 3.6 4 3.8v3c-1.5 0-2.9-.5-4-1.3v6.6c0 3.6-2.5 5.9-5.7 5.9-3.1 0-5.5-2.3-5.5-5.4 0-3 2.4-5.4 5.6-5.4.3 0 .7 0 1 .1v3.1c-.3-.1-.6-.2-1-.2-1.4 0-2.5 1.1-2.5 2.4 0 1.4 1.1 2.4 2.4 2.4 1.5 0 2.6-1 2.6-2.8V3h3.1z"/>
+          </svg>
+        </span>
+        <span class="txt">TikTok</span>
+        <span class="seta" aria-hidden="true">→</span>
+      </a>
+
+      <a class="btn" href="https://k.kwai.com/u/@DOUTORMIDIAA/CpNwyTfm" target="_blank" rel="noopener noreferrer">
+        <span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="7,4.5 20,12 7,19.5"/>
+          </svg>
+        </span>
+        <span class="txt">Kwai</span>
+        <span class="seta" aria-hidden="true">→</span>
+      </a>
+
+      <a class="btn" href="https://ig.me/m/doutormidiaa" target="_blank" rel="noopener noreferrer">
+        <span class="ic" aria-hidden="true">💼</span>
+        <span class="txt">Parcerias</span>
+        <span class="seta" aria-hidden="true">→</span>
+      </a>
+    </nav>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("fx");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (canvas && !reducedMotion) {
+      const context = canvas.getContext("2d");
+      let width;
+      let height;
+      const particles = [];
+
+      function resizeCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+
+      function createParticle() {
+        return {
+          x: Math.random() * width,
+          y: height + 10,
+          radius: Math.random() * 2 + 0.6,
+          velocity: Math.random() * 0.5 + 0.2,
+          sway: Math.random() * 1.2 + 0.3,
+          phase: Math.random() * 6.3,
+          opacity: Math.random() * 0.5 + 0.2,
+          color: Math.random() < 0.6 ? "255,200,61" : "255,126,38"
+        };
+      }
+
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      for (let index = 0; index < 26; index += 1) {
+        const particle = createParticle();
+        particle.y = Math.random() * height;
+        particles.push(particle);
+      }
+
+      function animate() {
+        context.clearRect(0, 0, width, height);
+
+        particles.forEach((particle) => {
+          particle.y -= particle.velocity;
+          particle.phase += 0.02;
+
+          const x = particle.x + Math.sin(particle.phase) * particle.sway * 8;
+          const flicker = 0.5 + Math.sin(particle.phase * 3) * 0.5;
+
+          context.beginPath();
+          context.arc(x, particle.y, particle.radius, 0, 6.3);
+          context.fillStyle = `rgba(${particle.color},${particle.opacity * flicker})`;
+          context.shadowColor = `rgba(${particle.color},0.8)`;
+          context.shadowBlur = 8;
+          context.fill();
+          context.shadowBlur = 0;
+
+          if (particle.y < -12) {
+            Object.assign(particle, createParticle());
+          }
+        });
+
+        window.requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+  </script>
+</body>
+</html>
