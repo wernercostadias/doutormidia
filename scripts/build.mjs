@@ -9,9 +9,9 @@ const staticFiles = [
   "regras.html",
   "foto.jpg",
   "jbl.webp",
-  "doutormidia.png",
-  "iphone-Photoroom.png",
-  "jblcomiphone.png"
+  "doutormidia.webp",
+  "iphone.webp",
+  "jblcomiphone.webp"
 ];
 
 await rm(outputDirectory, { recursive: true, force: true });
