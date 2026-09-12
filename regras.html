@@ -158,6 +158,11 @@
 
     .introducao strong { color: white; }
 
+    .introducao .beneficio {
+      color: var(--amarelo-claro);
+      font-weight: 800;
+    }
+
     .acoes {
       display: flex;
       flex-wrap: wrap;
@@ -224,6 +229,7 @@
 
     .premio::after {
       position: absolute;
+      z-index: 2;
       inset: 0;
       border-radius: inherit;
       background: linear-gradient(to bottom, transparent 68%, rgba(20, 6, 1, 0.3));
@@ -239,11 +245,71 @@
       height: 100%;
       object-fit: cover;
       object-position: center 46%;
-      transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.3, 1);
+      transform: scale(1.015);
+      transform-origin: center;
+      animation: vibrar-premio 3s ease-in-out infinite;
+      will-change: transform;
     }
 
-    .premio:hover .premio-foto {
-      transform: scale(1.025);
+    .premio-reflexo {
+      z-index: 1;
+      opacity: 0;
+      filter: brightness(1.65) contrast(0.94) saturate(0.82);
+      pointer-events: none;
+      animation: vibrar-premio 3s ease-in-out infinite, brilho-premio 3s ease-in-out infinite;
+      mix-blend-mode: screen;
+      -webkit-mask-image: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.06) 40%,
+        rgba(0, 0, 0, 0.42) 47%,
+        #000 50%,
+        rgba(0, 0, 0, 0.42) 53%,
+        rgba(0, 0, 0, 0.06) 60%,
+        transparent 66%,
+        transparent 100%
+      );
+      -webkit-mask-size: 300% 100%;
+      -webkit-mask-position: 100% 0;
+      mask-image: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 34%,
+        rgba(0, 0, 0, 0.06) 40%,
+        rgba(0, 0, 0, 0.42) 47%,
+        #000 50%,
+        rgba(0, 0, 0, 0.42) 53%,
+        rgba(0, 0, 0, 0.06) 60%,
+        transparent 66%,
+        transparent 100%
+      );
+      mask-size: 300% 100%;
+      mask-position: 100% 0;
+      will-change: opacity, transform, mask-position;
+    }
+
+    @keyframes vibrar-premio {
+      0%, 77%, 89%, 100% { transform: scale(1.015) translate(0); }
+      79% { transform: scale(1.02) translate(-2px, 1px) rotate(-0.18deg); }
+      81% { transform: scale(1.02) translate(2px, -1px) rotate(0.16deg); }
+      83% { transform: scale(1.02) translate(-1px, 0) rotate(-0.1deg); }
+      85% { transform: scale(1.02) translate(1px, 0) rotate(0.08deg); }
+    }
+
+    @keyframes brilho-premio {
+      0%, 76% {
+        opacity: 0;
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+      }
+      79% { opacity: 0.08; }
+      84% { opacity: 0.38; }
+      89%, 100% {
+        opacity: 0;
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+      }
     }
 
     .conteudo {
@@ -651,7 +717,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       * { transition: none !important; }
-      .premio-foto { transition: none !important; }
+      .premio-foto { animation: none !important; }
     }
   </style>
 </head>
@@ -669,8 +735,9 @@
       <div class="hero-copy">
         <h1>Uma JBL Boombox pode ser <span>sua!</span></h1>
         <p class="introducao">
-          Participe de graça e concorra a uma JBL Boombox para levar sua música para qualquer lugar.
-          Também tem sorteio de iPhone. <strong>Não precisa se cadastrar e não precisa comprar nada.</strong>
+          <strong>Quebrei a dieta de novo! 😂</strong> E tu pode quebrar a dieta ouvindo aquele som na JBL Boombox
+          ou sair de iPhone 17 Pro Max novinho. Bora tentar a sorte?
+          <strong class="beneficio">É de graça, sem cadastro e sem comprar nadinha.</strong>
         </p>
         <div class="acoes">
           <a class="botao" href="#regras">Ver como participar ↓</a>
@@ -680,6 +747,7 @@
 
       <div class="premio" aria-label="Doutor Mídia apresentando os prêmios do sorteio">
         <img class="premio-foto" src="doutormidia.png" alt="Doutor Mídia mostrando o iPhone e a JBL Boombox do sorteio" width="1024" height="1536">
+        <img class="premio-foto premio-reflexo" src="doutormidia.png" alt="" width="1024" height="1536" aria-hidden="true">
       </div>
     </section>
 
@@ -782,7 +850,7 @@
 
       <div class="dados">
         <div class="dado">
-          <span>Prazo da JBL</span>
+          <span>Prazo do sorteio</span>
           <strong>Até o fim do mês</strong>
         </div>
         <div class="dado">
