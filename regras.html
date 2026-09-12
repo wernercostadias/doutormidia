@@ -209,7 +209,9 @@
 
     .premio {
       position: relative;
-      min-height: 430px;
+      min-height: 0;
+      overflow: hidden;
+      aspect-ratio: 2 / 3;
       border: 1px solid rgba(255, 216, 77, 0.19);
       border-radius: 42px;
       background:
@@ -222,68 +224,26 @@
 
     .premio::after {
       position: absolute;
-      border-radius: 50%;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(to bottom, transparent 68%, rgba(20, 6, 1, 0.3));
       content: "";
+      pointer-events: none;
     }
 
-    .premio::after {
-      right: 10%;
-      bottom: 16%;
-      left: 10%;
-      height: 28px;
-      background: rgba(0, 0, 0, 0.42);
-      filter: blur(13px);
-    }
-
-    .premio img {
+    .premio-foto {
       position: absolute;
-      z-index: 2;
-      top: 55%;
-      left: 50%;
-      width: 106%;
-      height: auto;
-      filter: drop-shadow(0 24px 22px rgba(0, 0, 0, 0.5));
-      transform: translate(-50%, -50%) rotate(-2deg);
-      transform-origin: center;
-      animation: flash-jbl 3s ease-in-out infinite;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 46%;
+      transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.3, 1);
     }
 
-    @keyframes flash-jbl {
-      0%, 79%, 91%, 100% {
-        filter: brightness(1) drop-shadow(0 24px 22px rgba(0, 0, 0, 0.5));
-        transform: translate(-50%, -50%) rotate(-2deg);
-      }
-      81% {
-        filter: brightness(1.85) contrast(1.08) drop-shadow(0 0 18px rgba(255, 240, 170, 0.95)) drop-shadow(0 24px 22px rgba(0, 0, 0, 0.5));
-        transform: translate(calc(-50% - 3px), -50%) rotate(-3deg);
-      }
-      83% {
-        filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 216, 77, 0.65)) drop-shadow(0 24px 22px rgba(0, 0, 0, 0.5));
-        transform: translate(calc(-50% + 4px), -50%) rotate(-1deg);
-      }
-      85% {
-        filter: brightness(1.7) contrast(1.06) drop-shadow(0 0 15px rgba(255, 240, 170, 0.85)) drop-shadow(0 24px 22px rgba(0, 0, 0, 0.5));
-        transform: translate(calc(-50% - 2px), -50%) rotate(-2.7deg);
-      }
-      87% {
-        filter: brightness(1.08) drop-shadow(0 24px 22px rgba(0, 0, 0, 0.5));
-        transform: translate(calc(-50% + 2px), -50%) rotate(-1.5deg);
-      }
-    }
-
-    .premio-tag {
-      position: absolute;
-      z-index: 3;
-      right: 18px;
-      bottom: 16px;
-      padding: 6px 9px;
-      border-radius: 999px;
-      color: var(--amarelo);
-      background: rgba(36, 21, 0, 0.72);
-      font-size: 0.55rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .premio:hover .premio-foto {
+      transform: scale(1.025);
     }
 
     .conteudo {
@@ -316,6 +276,88 @@
     }
 
     h2 span { color: var(--amarelo); }
+
+    .seletor-premio {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 570px;
+      margin: 0 auto 20px;
+      padding: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 19px;
+      background: rgba(20, 6, 1, 0.52);
+    }
+
+    .seletor-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 11px 14px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      color: var(--texto-suave);
+      background: transparent;
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .seletor-btn:hover { color: white; }
+
+    .seletor-btn.ativo {
+      border-color: rgba(255, 216, 77, 0.42);
+      color: #241500;
+      background: linear-gradient(120deg, var(--amarelo-claro), var(--amarelo));
+      box-shadow: 0 7px 22px rgba(255, 200, 61, 0.18);
+    }
+
+    .icone-premio {
+      display: block;
+      width: 42px;
+      height: 36px;
+      flex: none;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.28));
+    }
+
+    .icone-premio.iphone {
+      width: 35px;
+      height: 38px;
+    }
+
+    .painel-regras[hidden] { display: none; }
+
+    .painel-regras { animation: mostrar-painel 0.3s ease both; }
+
+    @keyframes mostrar-painel {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .painel-titulo {
+      padding: 22px 24px 6px;
+      text-align: center;
+    }
+
+    .painel-titulo span {
+      color: var(--laranja-claro);
+      font-size: 0.67rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .painel-titulo h3 {
+      margin-top: 7px;
+      font-family: "Unbounded", sans-serif;
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      text-transform: uppercase;
+    }
 
     .passos {
       display: grid;
@@ -365,6 +407,89 @@
       color: var(--texto-suave);
       font-size: 0.9rem;
       line-height: 1.55;
+    }
+
+    .atalhos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .atalho-perfil {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 48px;
+      padding: 11px 14px;
+      border: 1px solid rgba(255, 216, 77, 0.22);
+      border-radius: 13px;
+      color: white;
+      background: rgba(255, 216, 77, 0.07);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .atalho-perfil:hover {
+      border-color: var(--amarelo);
+      background: rgba(255, 216, 77, 0.13);
+      transform: translateY(-2px);
+    }
+
+    .atalho-perfil span:last-child { color: var(--amarelo); }
+
+    .regra-chave {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 13px;
+      align-items: start;
+      margin: 14px 18px 18px;
+      padding: 17px;
+      border: 1px solid rgba(255, 157, 46, 0.3);
+      border-radius: 16px;
+      background: rgba(255, 122, 26, 0.09);
+    }
+
+    .regra-chave > span {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      color: #241500;
+      background: var(--amarelo);
+      font-weight: 900;
+      place-items: center;
+    }
+
+    .regra-chave strong {
+      display: block;
+      color: var(--amarelo-claro);
+      font-size: 0.86rem;
+    }
+
+    .regra-chave p {
+      margin-top: 4px;
+      color: var(--texto-suave);
+      font-size: 0.79rem;
+      line-height: 1.5;
+    }
+
+    .video-pendente {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      margin: 0 18px 18px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      color: rgba(255, 250, 244, 0.55);
+      background: rgba(255, 255, 255, 0.035);
+      font-size: 0.75rem;
+      font-weight: 700;
     }
 
     .aviso {
@@ -472,8 +597,6 @@
 
       .hero-copy { display: grid; justify-items: center; }
       .acoes { justify-content: center; }
-      .premio { min-height: 390px; }
-      .premio img { width: min(108%, 500px); }
     }
 
     @media (max-width: 520px) {
@@ -485,13 +608,18 @@
       .introducao { font-size: 0.96rem; }
       .acoes { width: 100%; }
       .botao { width: 100%; }
-      .premio { min-height: 330px; border-radius: 30px; }
-      .premio img { width: 110%; }
+      .premio { border-radius: 30px; }
       .passos { padding: 9px; border-radius: 23px; }
+      .seletor-premio { gap: 6px; padding: 6px; }
+      .seletor-btn { min-height: 49px; padding: 9px 7px; font-size: 0.76rem; }
       .passo { grid-template-columns: 47px 1fr; gap: 13px; min-height: 120px; padding: 17px 14px; }
       .numero { width: 45px; height: 45px; border-radius: 14px; font-size: 1.1rem; }
       .passo h3 { font-size: 0.94rem; }
       .passo p { font-size: 0.82rem; }
+      .atalhos { grid-template-columns: 1fr; }
+      .painel-titulo { padding-inline: 14px; }
+      .regra-chave { margin-inline: 9px; }
+      .video-pendente { margin-inline: 9px; }
       .aviso { align-items: start; padding: 17px; }
       .dados { grid-template-columns: 1fr; }
       .cta-final { padding: 38px 20px; }
@@ -500,7 +628,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       * { transition: none !important; }
-      .premio img { animation: none !important; }
+      .premio-foto { transition: none !important; }
     }
   </style>
 </head>
@@ -519,7 +647,7 @@
         <h1>Uma JBL Boombox pode ser <span>sua!</span></h1>
         <p class="introducao">
           Participe de graça e concorra a uma JBL Boombox para levar sua música para qualquer lugar.
-          <strong>Não precisa se cadastrar e não precisa comprar nada.</strong>
+          Também tem sorteio de iPhone. <strong>Não precisa se cadastrar e não precisa comprar nada.</strong>
         </p>
         <div class="acoes">
           <a class="botao" href="#regras">Ver como participar ↓</a>
@@ -527,56 +655,118 @@
         </div>
       </div>
 
-      <div class="premio" aria-label="JBL Boombox, prêmio do sorteio">
-        <img src="jbl.webp" alt="Caixa de som JBL Boombox" width="535" height="535">
-        <span class="premio-tag">Imagem ilustrativa</span>
+      <div class="premio" aria-label="Doutor Mídia apresentando os prêmios do sorteio">
+        <img class="premio-foto" src="doutormidia.png" alt="Doutor Mídia mostrando o iPhone e a JBL Boombox do sorteio" width="1024" height="1536">
       </div>
     </section>
 
     <section class="conteudo" id="regras">
       <div class="cabecalho-secao">
-        <span class="eyebrow">É muito fácil</span>
-        <h2>Siga os <span>3 passos</span></h2>
+        <span class="eyebrow">Participação rápida</span>
+        <h2>Escolha o <span>prêmio</span></h2>
       </div>
 
-      <div class="passos">
-        <article class="passo">
-          <span class="numero">01</span>
-          <div>
-            <h3>Siga o perfil <strong>@doutormidiaa</strong></h3>
-            <p>Acompanhe o perfil oficial no Instagram e mantenha-o seguido até a divulgação do resultado.</p>
-          </div>
-        </article>
+      <div class="seletor-premio" role="tablist" aria-label="Escolha as regras do prêmio">
+        <button class="seletor-btn ativo" type="button" role="tab" aria-selected="true" aria-controls="regras-jbl" id="tab-jbl" data-painel="regras-jbl">
+          <img class="icone-premio" src="jbl.webp" alt="" width="535" height="535" aria-hidden="true">
+          JBL Boombox
+        </button>
+        <button class="seletor-btn" type="button" role="tab" aria-selected="false" aria-controls="regras-iphone" id="tab-iphone" data-painel="regras-iphone">
+          <img class="icone-premio iphone" src="iphone-Photoroom.png" alt="" width="670" height="670" aria-hidden="true">
+          iPhone
+        </button>
+      </div>
 
-        <article class="passo">
-          <span class="numero">02</span>
-          <div>
-            <h3>Curta a <strong>publicação oficial</strong></h3>
-            <p>Encontre a publicação do sorteio no perfil e deixe sua curtida para validar sua participação.</p>
+      <div class="painel-regras" id="regras-jbl" role="tabpanel" aria-labelledby="tab-jbl">
+        <div class="passos">
+          <div class="painel-titulo">
+            <span>Regras do sorteio</span>
+            <h3>JBL Boombox</h3>
           </div>
-        </article>
 
-        <article class="passo">
-          <span class="numero">03</span>
-          <div>
-            <h3>Marque <strong>2 amigos</strong> nos comentários</h3>
-            <p>Marque dois perfis reais em um comentário. Não vale marcar empresas, famosos ou perfis falsos.</p>
+          <article class="passo">
+            <span class="numero">01</span>
+            <div>
+              <h3>Siga os <strong>dois perfis</strong></h3>
+              <p>Siga o Doutor Mídia e a Panelada Clandestina no Instagram.</p>
+              <div class="atalhos">
+                <a class="atalho-perfil" href="https://www.instagram.com/doutormidiaa/" target="_blank" rel="noopener noreferrer"><span>@doutormidiaa</span><span>Seguir ↗</span></a>
+                <a class="atalho-perfil" href="https://www.instagram.com/panelada.clandestina/" target="_blank" rel="noopener noreferrer"><span>@panelada.clandestina</span><span>Seguir ↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="passo">
+            <span class="numero">02</span>
+            <div>
+              <h3>Compartilhe o vídeo <strong>todos os dias</strong></h3>
+              <p>Até o fim do mês, compartilhe o vídeo oficial nos seus stories e marque os perfis @doutormidiaa e @panelada.clandestina.</p>
+            </div>
+          </article>
+
+          <div class="regra-chave">
+            <span>!</span>
+            <div>
+              <strong>Atenção à regra principal</strong>
+              <p>Os compartilhamentos e as marcações serão conferidos. Se alguma regra não tiver sido cumprida, outra pessoa será selecionada.</p>
+            </div>
           </div>
-        </article>
+
+          <div class="video-pendente">🎬 Link do vídeo oficial em breve</div>
+        </div>
+      </div>
+
+      <div class="painel-regras" id="regras-iphone" role="tabpanel" aria-labelledby="tab-iphone" hidden>
+        <div class="passos">
+          <div class="painel-titulo">
+            <span>Regras do sorteio</span>
+            <h3>iPhone</h3>
+          </div>
+
+          <article class="passo">
+            <span class="numero">01</span>
+            <div>
+              <h3>Siga os <strong>dois perfis</strong></h3>
+              <p>Siga o Doutor Mídia e a Panelada Clandestina no Instagram.</p>
+              <div class="atalhos">
+                <a class="atalho-perfil" href="https://www.instagram.com/doutormidiaa/" target="_blank" rel="noopener noreferrer"><span>@doutormidiaa</span><span>Seguir ↗</span></a>
+                <a class="atalho-perfil" href="https://www.instagram.com/panelada.clandestina/" target="_blank" rel="noopener noreferrer"><span>@panelada.clandestina</span><span>Seguir ↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="passo">
+            <span class="numero">02</span>
+            <div>
+              <h3>Marque <strong>3 amigos</strong></h3>
+              <p>Marque três amigos nos comentários do vídeo oficial. Os três também precisam seguir os dois perfis.</p>
+            </div>
+          </article>
+
+          <div class="regra-chave">
+            <span>+</span>
+            <div>
+              <strong>Mais amigos, mais chances</strong>
+              <p>Você pode fazer mais comentários marcando amigos. Quanto mais amigos você marcar, mais chances terá de ganhar.</p>
+            </div>
+          </div>
+
+          <div class="video-pendente">🎬 Link do vídeo oficial em breve</div>
+        </div>
       </div>
 
       <div class="aviso">
         <span class="aviso-icone">!</span>
         <div>
-          <strong>Este conteúdo ainda é um rascunho.</strong>
-          <p>As regras, datas e condições finais serão confirmadas antes da publicação oficial do sorteio.</p>
+          <strong>O link do vídeo ainda será adicionado.</strong>
+          <p>Assim que a publicação oficial estiver disponível, o botão para participar aparecerá nesta página.</p>
         </div>
       </div>
 
       <div class="dados">
         <div class="dado">
-          <span>Data do sorteio</span>
-          <strong>Em breve</strong>
+          <span>Prazo da JBL</span>
+          <strong>Até o fim do mês</strong>
         </div>
         <div class="dado">
           <span>Resultado</span>
@@ -586,8 +776,8 @@
 
       <div class="cta-final">
         <h2>Pronto para <span>participar?</span></h2>
-        <p>Confira o perfil oficial, siga todos os passos e boa sorte!</p>
-        <a class="botao" href="https://www.instagram.com/doutormidiaa" target="_blank" rel="noopener noreferrer">Ir para o Instagram →</a>
+        <p>Siga os dois perfis agora. Quando o vídeo oficial for publicado, volte para concluir as regras.</p>
+        <a class="botao" href="https://www.instagram.com/doutormidiaa/" target="_blank" rel="noopener noreferrer">Seguir Doutor Mídia →</a>
       </div>
     </section>
   </main>
@@ -595,5 +785,24 @@
   <footer>
     Promoção sem vínculo com o Instagram. Regras e informações sujeitas à confirmação na publicação oficial.
   </footer>
+
+  <script>
+    const botoesPremio = document.querySelectorAll(".seletor-btn");
+    const paineisRegras = document.querySelectorAll(".painel-regras");
+
+    botoesPremio.forEach((botao) => {
+      botao.addEventListener("click", () => {
+        botoesPremio.forEach((item) => {
+          const ativo = item === botao;
+          item.classList.toggle("ativo", ativo);
+          item.setAttribute("aria-selected", String(ativo));
+        });
+
+        paineisRegras.forEach((painel) => {
+          painel.hidden = painel.id !== botao.dataset.painel;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
