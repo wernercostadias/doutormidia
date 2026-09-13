@@ -9,6 +9,7 @@ const staticFiles = [
   "regras.html",
   "foto.jpg",
   "jbl.webp",
+  "jblbombox.webp",
   "doutormidia.webp",
   "iphone.webp",
   "jblcomiphone.webp"
